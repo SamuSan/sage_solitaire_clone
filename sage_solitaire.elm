@@ -4,9 +4,7 @@ import Html exposing (..)
 -- MODEL
 
 type alias Model =
-  { value : Int
-  , suit : String
-  , selected : Bool
+  {
   }
 
 
@@ -18,8 +16,7 @@ type Msg =
 update : Msg -> Model -> Model
 update msg model =
   case msg of
-    Reset ->
-      ...
+    Select ->
 
 
 -- VIEW
