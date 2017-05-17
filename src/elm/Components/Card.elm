@@ -42,7 +42,7 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Select ->
-            ( { model | selected = True }, Cmd.none )
+            ({ model | selected = True }, Cmd.none)
 
 
 subscriptions : Model -> Sub Msg
@@ -57,5 +57,5 @@ subscriptions model =
 view : Model -> Html Msg
 view model =
     div []
-        [ div [] [ img [ src (String.concat [ "cards/", (String.concat [ (toString model.value), model.suit ]), ".svg" ]), width 50, height 100 ] [] ]
+        [ div [class "POOP"] [ img [ src (String.concat [ "../cards/", (String.concat [ (toString model.value), model.suit ]), ".svg" ]), width 50, height 100 ] [] ]
         ]
