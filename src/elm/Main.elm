@@ -3,12 +3,6 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 --import Html.Events exposing ( onClick )
 
--- component import example
---import Components.Hello exposing ( hello )
---import Components.Card exposing ( .. )
---import Components.Card exposing ( cardView )
-
-
 -- APP
 main : Program Never Int Msg
 main =
@@ -22,6 +16,15 @@ model : number
 model =
   0
 
+type alias Deck =
+  {
+    cards : List Card
+  }
+
+deck : List Card -> Deck
+deck cards =
+  Deck cards
+
 
 --CARD
 type alias Card =
@@ -32,6 +35,14 @@ type alias Card =
 card : String -> Int -> Card
 card suit value =
   Card suit value
+
+cards : List Card
+cards =
+  List.concat (List.map generateCards ["H", "A", "S", "D"])
+
+generateCards : String -> List Card
+generateCards suit =
+  List.map2 Card (List.repeat 14 suit)(List.range 2 14)
 
 translateFaceCard : Int -> String
 translateFaceCard value =
@@ -57,7 +68,6 @@ imageName card =
 -- UPDATE
 type Msg = NoOp | Increment
 
-
 update : Msg -> Model -> Model
 update msg model =
   case msg of
@@ -65,32 +75,20 @@ update msg model =
     Increment -> model + 1
 
 
- --VIEW
- --Html is defined as: elem [ attribs ][ children ]
- --CSS can be applied via class names or inline style attrib
+
 cardView : Card -> Html Msg
 cardView card =
-  div[]
-  [
     div[]
-    [
-      text card.suit, text (toString card.value)
-    ]
-    , div[]
     [
       img [src (imageName card)][]
     ]
-  ]
-
---generateCards : List Card
---generateCards =
---  div[][]
 
 view : Model -> Html Msg
 view model =
   div [ class "container", style [("margin-top", "30px"), ( "text-align", "center" )] ]
     [    -- inline CSS (literal)
       cardView (card "H" 2)
+      --List.map cardView cards
     ]
 
 
