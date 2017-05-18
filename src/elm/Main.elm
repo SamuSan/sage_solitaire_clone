@@ -51,7 +51,7 @@ translateCardRank value =
 
 imageName : Card -> String
 imageName card =
-  String.concat[ "/cards/", (translateCardRank card.value), card.suit, ".svg" ]
+  String.concat[ "static/img/cards/", (translateCardRank card.value), card.suit, ".svg" ]
 
 
 -- UPDATE
@@ -82,6 +82,9 @@ cardView card =
     ]
   ]
 
+--generateCards : List Card
+--generateCards =
+--  div[][]
 
 view : Model -> Html Msg
 view model =
