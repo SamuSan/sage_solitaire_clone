@@ -28,7 +28,7 @@ card suit value =
 
 cards : List Card
 cards =
-  List.concat (List.map generateCards ["H", "A", "S", "D"])
+  List.concat (List.map generateCards ["H", "C", "S", "D"])
 
 generateCards : String -> List Card
 generateCards suit =
