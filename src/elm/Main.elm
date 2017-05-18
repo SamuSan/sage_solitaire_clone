@@ -85,12 +85,7 @@ cardView card =
 
 view : Model -> Html Msg
 view model =
-  div [ class "container", style [("margin-top", "30px"), ( "text-align", "center" )] ]
-    [    -- inline CSS (literal)
-      cardView (card "H" 2)
-      --List.map cardView cards
-    ]
-
+  div [ class ""] (List.map cardView cards)
 
 -- CSS STYLES
 styles : { img : List ( String, String ) }
