@@ -16,16 +16,6 @@ model : number
 model =
   0
 
-type alias Deck =
-  {
-    cards : List Card
-  }
-
-deck : List Card -> Deck
-deck cards =
-  Deck cards
-
-
 --CARD
 type alias Card =
   { suit : String
