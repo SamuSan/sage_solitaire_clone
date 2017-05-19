@@ -1,13 +1,13 @@
 module Main exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Dict exposing ( Dict )
 --import Html.Events exposing ( onClick )
 
 -- APP
 main : Program Never Int Msg
 main =
   Html.beginnerProgram { model = model, view = view, update = update }
-
 
 -- MODEL
 type alias Model = Int
@@ -34,18 +34,21 @@ generateCards : String -> List Card
 generateCards suit =
   List.map2 Card (List.repeat 14 suit)(List.range 2 14)
 
+permittedCardValues : { faceCards : List Int, numberCards : List Int, faceCardMap : Dict number String }
+permittedCardValues =
+  { numberCards = List.range 2 10
+  , faceCards   = List.range 11 14
+  , faceCardMap = Dict.fromList [(11, "J"), (12, "Q"), (13, "K"), (14, "A")]
+  }
+
 translateFaceCard : Int -> String
 translateFaceCard value =
-  case value of
-    11 -> "J"
-    12 -> "K"
-    13 -> "Q"
-    14 -> "A"
-    _  -> ""
+  toString (Dict.get value permittedCardValues.faceCardMap)
+
 
 translateCardRank : Int -> String
 translateCardRank value =
-  if value < 11  then
+  if List.member value permittedCardValues.numberCards then
     toString value
   else
     translateFaceCard value
@@ -68,9 +71,9 @@ update msg model =
 
 cardView : Card -> Html Msg
 cardView card =
-    div[]
+    div[ ]
     [
-      img [src (imageName card)][]
+      img [src (imageName card), class "card"][]
     ]
 
 view : Model -> Html Msg
